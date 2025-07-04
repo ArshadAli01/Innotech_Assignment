@@ -2,7 +2,30 @@
 
 ## Project Overview
 
-This web application allows users to upload CSV files containing sales data and view summarized metrics on a dynamic dashboard. The application processes uploaded CSV files with a strict three-column format—`product_name`, `quantity`, and `price_per_unit`—and calculates key metrics: total records (number of rows), total quantity (sum of quantities), and total revenue (sum of quantity × price_per_unit per row). These metrics are stored in an in-memory list for the duration of the server session. The dashboard displays a list of all processed uploads, showing each upload's unique ID, timestamp, and total revenue, with an option to view detailed metrics (total records, total quantity, and total revenue) by clicking an entry.
+**Input**
+A user selects and uploads a CSV file. This file must have exactly three columns:
+
+1. product_name – the name of each sold item
+2. quantity – how many units were sold of that item
+3. price_per_unit – the sale price for one unit of that item
+
+**Processing**
+
+1. Parse the CSV row by row
+2. Compute summary metrics for that upload:
+   
+Total records — count of rows
+Total quantity — sum of the quantity column
+Total revenue — sum of (quantity × price_per_unit) across all rows
+
+3. Store these metrics in a simple in-memory list for the duration of the server session
+
+**Output**
+A web dashboard that shows, for each upload in the current session:
+
+A unique Upload ID
+The Timestamp when processing finished
+The calculated Total Revenue
 
 ## Setup Instructions
 
@@ -87,19 +110,10 @@ The current implementation has some constraints that could be improved:
 1. **Data Persistence**:
    - Data is lost on server restart due to in-memory storage. A database (e.g., SQLite, MySQL) could enable persistence.
 
-2. **Scalability**:
-   - In-memory storage limits handling of large datasets or concurrent users. A backend database or caching layer (e.g., Redis) could enhance scalability.
-
-3. **Security**:
+2. **Security**:
    - No authentication exists, making data publicly accessible. Adding user login and access controls would improve security.
 
-4. **Error Handling**:
+3. **Error Handling**:
    - Only basic parsing error feedback is provided. More detailed validation (e.g., data type checks, file size limits) could improve usability.
-
-5. **UI Enhancements**:
-   - The dashboard lacks real-time updates or visualizations. Adding WebSockets for live updates or Chart.js for graphs could enrich the experience.
-
-6. **Testing**:
-   - No automated tests are included. Implementing JUnit for backend and Selenium for frontend testing would ensure reliability.
 
 By addressing these areas, the application could become a more robust tool for sales data analysis.
