@@ -1,4 +1,6 @@
 # CSV Sales Data Uploader & Dynamic Summary Dashboard
+![assignment_output](https://github.com/user-attachments/assets/61564481-d87c-4c3b-a9a7-ad344b2b0a0e)
+
 
 ## Project Overview
 
